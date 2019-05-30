@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 type Props = {};
@@ -59,7 +59,62 @@ export default class App extends Component<Props> {
   this.setState({
     turno: turno
   });
+
+  // Validando ganadores
+    let ganador = this.ganador();
+    if (ganador === 1 ) {
+      Alert.alert("Gano el jugador 1");
+      this.inicializarJuego();
+    }
+    if (ganador === -1) {
+      Alert.alert("Gano el jugador 2");
+      this.inicializarJuego()
+    }
 };
+
+  ganador = () => {
+    const num_casillas = 3;
+    let arr = this.state.juego.slice();
+    let sum;
+
+    // Validando columnas
+    for (let i = 0; i < num_casillas; i++) {
+      sum = arr[i][0] + arr[i][1] + arr[i][2];
+      if (sum === 3) {
+        return 1;
+      } else if (sum === -3) {
+        return -1;
+      }
+    }
+
+    // Validando filas
+    for (let i = 0; i < num_casillas; i++) {
+      sum = arr[0][i] + arr[1][i] + arr[2][i];
+      if (sum === 3) {
+        return 1;
+      } else if (sum === -3) {
+        return -1;
+      }
+    }
+
+    // Validando diagonales.
+    sum = arr[0][0] + arr[1][1] + arr[2][2];
+    if (sum === 3) {
+      return 1;
+    } else if (sum === -3) {
+      return -1;
+    }
+
+    sum = arr[0][2] + arr[1][1] + arr[2][0];
+    if (sum === 3) {
+      return 1;
+    } else if (sum === -3) {
+      return -1;
+    }
+
+    // Si no hay ganadores devolvemos false
+    return 0;
+  };
 
   render() {
     return (
