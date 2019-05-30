@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 type Props = {};
@@ -18,6 +18,17 @@ export default class App extends Component<Props> {
     }
   };
 
+  inicializarJuego() {
+    this.setState({
+      juego: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ],
+      turno: 1
+    });
+  };
+
   dibujarFigura = (colu, fila) => {
     let coor = this.state.juego[colu][fila];
     switch (coor) {
@@ -27,7 +38,7 @@ export default class App extends Component<Props> {
     }
   };
 
-jugada = (colu, fila) => {
+  jugada = (colu, fila) => {
   // Obtiendo al jugador actual
   let jugador = this.state.turno;
   let juego = this.state.juego.slice();
@@ -92,6 +103,12 @@ jugada = (colu, fila) => {
           </TouchableOpacity>
         </View>
 
+        <View>
+          <TouchableOpacity onPress={() => this.inicializarJuego()} style={styles.btn}>
+            <Text style={styles.btnText}>Limpiar</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
     );
   }
@@ -119,5 +136,18 @@ const styles = StyleSheet.create({
   y: {
     fontSize: 100,
     color: "blue"
+  },
+  btn: {
+    fontWeight: "bold",
+    color: "red",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "red",
+    margin: 10,
+    padding: 10,
+    borderRadius: 10
+  },
+  btnText: {
+    fontSize: 20
   }
 });
