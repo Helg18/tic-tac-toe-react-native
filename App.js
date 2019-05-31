@@ -119,6 +119,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.container} />
         {/* Fila */}
         <View style={styles.row}>
           <TouchableOpacity onPress={() => this.jugada(0, 0)} style={[styles.casilla, { borderTopWidth: 0, borderLeftWidth: 0 } ]}>
@@ -164,6 +165,11 @@ export default class App extends Component<Props> {
           </TouchableOpacity>
         </View>
 
+        <View style={styles.container}>
+          <Text style={styles.developedBy}>Hecho con <Icon name={"heart"} style={styles.developedBy} /></Text>
+          <Text style={styles.developedBy}>Desarrollado por Henry Leon</Text>
+        </View>
+
       </View>
     );
   }
@@ -203,6 +209,11 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   btnText: {
+    color: "red",
     fontSize: 20
+  },
+  developedBy: {
+    color: "red",
+    fontSize: 16
   }
 });
