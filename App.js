@@ -39,28 +39,28 @@ export default class App extends Component<Props> {
   };
 
   jugada = (colu, fila) => {
-  // Obtiendo al jugador actual
-  let jugador = this.state.turno;
-  let juego = this.state.juego.slice();
+    // Obtiendo al jugador actual
+    let jugador = this.state.turno;
+    let juego = this.state.juego.slice();
 
-  // Validando que la casilla esta disponible.
-  if (juego[colu][fila] !== 0) {
-    return;
-  }
+    // Validando que la casilla esta disponible.
+    if (juego[colu][fila] !== 0) {
+      return;
+    }
 
-  // Seteando la casilla jugada
-  this.setState({
-    juego: juego
-  });
-  juego[colu][fila] = jugador;
+    // Seteando la casilla jugada
+    this.setState({
+      juego: juego
+    });
+    juego[colu][fila] = jugador;
 
-  let turno = (jugador === 1 ) ? -1 : 1;
-  // Seteando el turno del siguiente jugador
-  this.setState({
-    turno: turno
-  });
+    let turno = (jugador === 1 ) ? -1 : 1;
+    // Seteando el turno del siguiente jugador
+    this.setState({
+      turno: turno
+    });
 
-  // Validando ganadores
+    // Validando ganadores
     let ganador = this.ganador();
     if (ganador === 1 ) {
       Alert.alert("Gano el jugador 1");
@@ -70,7 +70,7 @@ export default class App extends Component<Props> {
       Alert.alert("Gano el jugador 2");
       this.inicializarJuego()
     }
-};
+  };
 
   ganador = () => {
     const num_casillas = 3;
